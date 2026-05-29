@@ -110,8 +110,8 @@ export function useKeyboard(handlers: KeyboardHandlers, state: KeyboardState) {
       return;
     }
 
-    // Ctrl+W to close window — non-macOS only (macOS closes windows natively)
-    if (!__IS_MACOS__ && e.key === 'w' && (e.metaKey || e.ctrlKey)) {
+    // Cmd+W / Ctrl+W to close window
+    if (e.key === 'w' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
       handlers.onCloseWindow?.();
       return;

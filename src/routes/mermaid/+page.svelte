@@ -275,17 +275,15 @@
 <div class="mermaid-window">
 	<header class="window-header" data-tauri-drag-region>
 		<span class="window-title">Mermaid</span>
-		{#if !__IS_MACOS__}
-			<button
-				class="window-close"
-				onclick={closeWindow}
-				title="Close"
-				aria-label="Close"
-				data-tauri-drag-region="false"
-			>
-				×
-			</button>
-		{/if}
+		<button
+			class="window-close"
+			onclick={closeWindow}
+			title="Close"
+			aria-label="Close"
+			data-tauri-drag-region="false"
+		>
+			×
+		</button>
 	</header>
 	{#if loading}
 		<div class="mermaid-loading">Rendering diagram...</div>

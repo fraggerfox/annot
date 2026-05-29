@@ -152,7 +152,8 @@ pub async fn open_excalidraw_window(
                 .title("Excalidraw")
                 .inner_size(width, height)
                 .min_inner_size(600.0, 400.0)
-                .visible(false);
+                .visible(false)
+                .decorations(false);
         // Windows-only: solid themed bg so WebView2 doesn't flash white.
         #[cfg(windows)]
         let b = b.background_color(crate::config::window_background_color(
@@ -163,8 +164,6 @@ pub async fn open_excalidraw_window(
             .title_bar_style(tauri::TitleBarStyle::Overlay)
             .hidden_title(true)
             .traffic_light_position(tauri::LogicalPosition::new(12.0, 22.0));
-        #[cfg(target_os = "linux")]
-        let b = b.decorations(false);
         b
     };
 

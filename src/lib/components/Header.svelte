@@ -168,11 +168,9 @@
     <button class="header-btn" onclick={onOpenSaveModal} title="Save to file (Cmd+S)">
       <Icon name="save" />
     </button>
-    {#if !__IS_MACOS__}
-      <button class="header-btn close-btn" onclick={() => getCurrentWindow().close()} title="Close (Ctrl+W)">
-        ×
-      </button>
-    {/if}
+    <button class="header-btn close-btn" onclick={() => getCurrentWindow().close()} title="Close ({__IS_MACOS__ ? 'Cmd' : 'Ctrl'}+W)">
+      ×
+    </button>
   </div>
 </header>
 

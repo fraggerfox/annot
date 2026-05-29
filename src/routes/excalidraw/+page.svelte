@@ -244,17 +244,15 @@
 <div class="excalidraw-window">
   <header class="window-header" data-tauri-drag-region>
     <span class="window-title">Excalidraw</span>
-    {#if !__IS_MACOS__}
-      <button
-        class="window-close"
-        onclick={closeWindow}
-        title="Save and close"
-        aria-label="Save and close"
-        data-tauri-drag-region="false"
-      >
-        ×
-      </button>
-    {/if}
+    <button
+      class="window-close"
+      onclick={closeWindow}
+      title="Save and close"
+      aria-label="Save and close"
+      data-tauri-drag-region="false"
+    >
+      ×
+    </button>
   </header>
   {#if loading}
     <div class="excalidraw-loading">Loading Excalidraw...</div>
