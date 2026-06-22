@@ -59,9 +59,28 @@
     ctx.setDiffView(ctx.diffView === 'unified' ? 'split' : 'unified');
     (e.currentTarget as HTMLButtonElement).blur();
   }
+
+  // Handle double-click on header to maximize/restore window (macOS behavior)
+  async function handleHeaderDoubleClick(event: MouseEvent) {
+    // Only handle if clicking on the drag region itself, not on interactive elements
+    const target = event.target as HTMLElement;
+    if (target.hasAttribute('data-tauri-drag-region') ||
+        target.closest('[data-tauri-drag-region="false"]')) {
+      return;
+    }
+
+    const window = getCurrentWindow();
+    const isMaximized = await window.isMaximized();
+
+    if (isMaximized) {
+      await window.unmaximize();
+    } else {
+      await window.maximize();
+    }
+  }
 </script>
 
-<header class="header" data-tauri-drag-region="deep">
+<header class="header" data-tauri-drag-region="deep" ondblclick={handleHeaderDoubleClick}>
   <div class="header-left">
     {#if currentFile}
       <!-- Diff mode: show hunk metadata -->

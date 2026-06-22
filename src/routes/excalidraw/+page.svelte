@@ -234,6 +234,24 @@
     await win.close();
   }
 
+  // Handle double-click on header to maximize/restore window (macOS behavior)
+  async function handleHeaderDoubleClick(event: MouseEvent) {
+    // Only handle if clicking on the drag region itself, not on interactive elements
+    const target = event.target as HTMLElement;
+    if (target.closest('[data-tauri-drag-region="false"]')) {
+      return;
+    }
+
+    const window = getCurrentWindow();
+    const isMaximized = await window.isMaximized();
+
+    if (isMaximized) {
+      await window.unmaximize();
+    } else {
+      await window.maximize();
+    }
+  }
+
   // Use capture phase to intercept Escape before Excalidraw handles it
   $effect(() => {
     window.addEventListener('keydown', handleKeyDown, true);
@@ -242,7 +260,7 @@
 </script>
 
 <div class="excalidraw-window">
-  <header class="window-header" data-tauri-drag-region>
+  <header class="window-header" data-tauri-drag-region ondblclick={handleHeaderDoubleClick}>
     <span class="window-title">Excalidraw</span>
     <button
       class="window-close"
